@@ -1,48 +1,45 @@
-# 🎴 Terminal Solitaire (C++)
+# Solitaire Game - C++ Implementation
 
-![C++](https://img.shields.io/badge/C++-00599C?style=flat&logo=c%2B%2B&logoColor=white)
-![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20macOS-blue)
-![License](https://img.shields.io/badge/License-MIT-green)
+## Overview
+This is a simple Solitaire game implementation in C++. The game is based on the standard rules of Solitaire (Klondike). It uses a deck of 52 playing cards and involves moving cards between columns, stock, waste piles, and foundations to achieve the objective of building up all four foundations from Ace to King in each suit.
 
-> A classic Klondike Solitaire game with keyboard-based controls, implemented in C++ for terminal environments.
+## Features
+- **Card Movement**: Move cards between columns, stock, waste piles, and foundations.
+- **Undo Feature**: Undo the last move made.
+- **Shuffle and Deal**: The deck is shuffled at the start, and cards are dealt into the tableau.
+- **Display**: The current state of the game is displayed after every move, showing the stock, waste, foundations, and tableau.
 
-## 📥 Installation
+## Classes and Structure
+### Card
+- Represents a single card with a suit (Hearts, Diamonds, Clubs, Spades) and a value (Ace, 2-9, 10, Jack, Queen, King).
+- Supports flipping the card, displaying the card, and checking for its rank and color.
 
-### Requirements
-- C++17 compatible compiler (GCC, Clang, or MSVC)
-- Terminal with ANSI escape code support (for colors)
+### List
+- A custom doubly linked list implementation for managing the tableau columns.
+- Supports basic list operations like inserting, removing, and iterating through elements.
 
-### Build Instructions
-```bash
-# Clone repository
-git clone https://github.com/yourusername/terminal-solitaire.git
-cd terminal-solitaire
+### Stack
+- A stack implementation that uses the `List` class.
+- Supports basic stack operations like pushing and popping cards.
 
-# Compile
-g++ -std=c++17 -o solitaire main.cpp Card.cpp Game.cpp -O2
+### Command
+- A command structure that stores the details of a move, such as source column, destination column, number of cards, and move direction.
+- Supports executing and reversing moves.
 
-# Run
-./solitaire   # Linux/macOS
-.\solitaire.exe # Windows
-# MAIN MENU
-[1] New Game
-[2] Resume Game
-[3] How to Play
-[4] Quit
-=====================================
-  SOLITAIRE   Moves: 42   Hints: 3
-=====================================
+### Game
+- The main class managing the game state.
+- Handles deck initialization, shuffling, dealing, and the rules for moving cards between different piles (tableau, stock, waste, and foundations).
+- Includes logic for checking if the game has been won and for displaying the game state.
 
-Stock: [XX]  Waste: [K♦]
+## How to Play
+1. **Game Start**: The game starts with a shuffled deck and the cards are dealt into 7 tableau columns.
+2. **Making Moves**: You can move cards between tableau columns, the stock, waste pile, and foundations.
+   - You can move cards from tableau to tableau by following the alternating color and descending rank rule.
+   - Cards can be moved from the waste pile to a tableau or foundation if the move follows the rules.
+3. **Undo**: You can undo your last move at any time by entering `-1` when prompted.
+4. **Winning the Game**: The game is won when all cards are placed in the foundations, from Ace to King in each suit.
 
-Foundations:
-[  ] [  ] [  ] [  ]
-
-Tableau:
-1: [A♠] 
-2: [XX] [7♥] 
-3: [XX] [XX] [Q♣] 
-4: [XX] [XX] [XX] [2♦] 
-5: [XX] [XX] [XX] [XX] [10♠] 
-6: [XX] [XX] [XX] [XX] [XX] [3♣] 
-7: [XX] [XX] [XX] [XX] [XX] [XX] [J♦] 
+## Compilation and Execution
+1. **Compile the Game**: You can compile the game using a C++ compiler.
+   ```bash
+   g++ -o solitaire solitaire.cpp
